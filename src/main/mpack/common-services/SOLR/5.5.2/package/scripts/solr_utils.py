@@ -1,9 +1,10 @@
-from resource_management.core.shell import call
-from resource_management.libraries.functions.format import format
+import os
+import re
+
 from resource_management.core.logger import Logger
 from resource_management.core.resources.system import Execute
-import re
-import os
+from resource_management.core.shell import call
+from resource_management.libraries.functions.format import format
 
 COLLECTION_PATTERN = "\/solr\/[a-zA-Z0-9\._-]+"
 CORE_PATTERN = "{collection_path}\/core_node[0-9]+"
@@ -11,10 +12,9 @@ WRITE_LOCK_PATTERN = "{0}/data/index/write.lock "
 
 
 def solr_port_validation():
-    import params
-
-    code, output = call(format('netstat -lnt | awk -v v1={solr_config_port} \'$6 == "LISTEN" && $4 ~ ":"v1\''),
-                        timeout=60)
+    code, output = call(
+            format('netstat -lnt | awk -v v1={solr_config_port} \'$6 == "LISTEN" && $4 ~ ":"v1\''),
+            timeout=60)
     Logger.info(format("Solr port validation output: {output}"))
 
     if "LISTEN" in output:
@@ -46,18 +46,17 @@ def exists_collection(collection_name):
     if not params.solr_cloud_mode:
         if os.path.isdir(format("{solr_config_data_dir}/{collection_name}")):
             return True
-        else:
-            return False
+        return False
 
-    code, output = call(format('{zk_client_prefix} -cmd get {solr_cloud_zk_directory}/collections/{collection_name}'),
-                        env={'JAVA_HOME': params.java64_home},
-                        timeout=60
-                        )
+    code, output = call(format(
+            '{zk_client_prefix} -cmd get {solr_cloud_zk_directory}/collections/{collection_name}'),
+            env={'JAVA_HOME': params.java64_home},
+            timeout=60
+    )
 
     if "NoNodeException" in output:
         return False
-    else:
-        return True
+    return True
 
 
 def get_collection_paths(hadoop_output):
@@ -98,7 +97,8 @@ def delete_write_lock_files():
     import params
 
     if params.security_enabled:
-        kinit_if_needed = format('{kinit_path_local} {hdfs_principal_name} -kt {hdfs_user_keytab}; ')
+        kinit_if_needed = format(
+                '{kinit_path_local} {hdfs_principal_name} -kt {hdfs_user_keytab}; ')
     else:
         kinit_if_needed = ''
 
@@ -112,6 +112,7 @@ def delete_write_lock_files():
         write_locks_to_delete = get_write_lock_files_solr_standalone(collections)
 
     if len(write_locks_to_delete) > 1:
-        Execute(format('{hadoop_prefix} -rm -f {write_locks_to_delete}'),
+        Execute(
+                format('{hadoop_prefix} -rm -f {write_locks_to_delete}'),
                 user=params.hdfs_user
                 )

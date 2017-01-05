@@ -61,7 +61,7 @@
             "app_id": "solr-timeline-app",
             "interval": 1,
             "metric_list": [
-              "olr.admin.info.system.processCpuLoad"
+              "solr.admin.info.system.processCpuLoad"
             ],
             "value": "{0}",
             "compute": "mean"

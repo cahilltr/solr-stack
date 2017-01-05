@@ -15,6 +15,7 @@ def setup_solr_kerberos_auth():
     if not params.solr_cloud_mode:
         return
 
+    # TODO LWSHADOOP-637 add json in the config file and only upload it when kerberos is enable
     command = format('{zk_client_prefix} -cmd put {solr_cloud_zk_directory}{security_json} ')
     command += '\'{"authentication":{"class": "org.apache.solr.security.KerberosPlugin"}}\''
     Execute(command,
