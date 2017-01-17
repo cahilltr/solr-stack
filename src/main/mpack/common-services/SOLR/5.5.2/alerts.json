@@ -35,37 +35,8 @@
         "interval": 5,
         "scope": "ANY",
         "source": {
-          "type": "AMS",
-          "uri": {
-            "http": "{{ams-site/timeline.metrics.service.webapp.address}}",
-            "https": "{{ams-site/timeline.metrics.service.webapp.address}}",
-            "https_property": "{{ams-site/timeline.metrics.service.http.policy}}",
-            "https_property_value": "HTTPS_ONLY",
-            "connection_timeout": 15.0
-          },
-          "reporting": {
-            "ok": {
-              "text": "CPU load {0:.1%}"
-            },
-            "warning": {
-              "text": "CPU load {0:.1%}",
-              "value": 400
-            },
-            "critical": {
-              "text": "CPU load {0:.1%}",
-              "value": 450
-            },
-            "units" : "%"
-          },
-          "ams": {
-            "app_id": "solr-timeline-app",
-            "interval": 1,
-            "metric_list": [
-              "solr.admin.info.system.processCpuLoad"
-            ],
-            "value": "{0}",
-            "compute": "mean"
-          }
+          "type": "SCRIPT",
+          "path": "SOLR/5.5.2/package/alerts/alert_solr_cpu_metrics.py"
         }
       },
       {
@@ -75,38 +46,8 @@
         "interval": 5,
         "scope": "ANY",
         "source": {
-          "type": "AMS",
-          "uri": {
-            "http": "{{ams-site/timeline.metrics.service.webapp.address}}",
-            "https": "{{ams-site/timeline.metrics.service.webapp.address}}",
-            "https_property": "{{ams-site/timeline.metrics.service.http.policy}}",
-            "https_property_value": "HTTPS_ONLY",
-            "connection_timeout": 15.0
-          },
-          "reporting": {
-            "ok": {
-              "text": "Memory usage is {0:.1%}"
-            },
-            "warning": {
-              "text": "Memory usage is {0:.1%}",
-              "value": 400
-            },
-            "critical": {
-              "text": "Memory usage is {0:.1%}",
-              "value": 450
-            },
-            "units" : "%"
-          },
-          "ams": {
-            "app_id": "solr-timeline-app",
-            "interval": 1,
-            "metric_list": [
-              "solr.admin.info.jvm.memory.used",
-              "solr.admin.info.jvm.memory.max"
-            ],
-            "value": "{0} / {1}",
-            "compute": "mean"
-          }
+          "type": "SCRIPT",
+          "path": "SOLR/5.5.2/package/alerts/alert_solr_memory_metrics.py"
         }
       }
     ]
