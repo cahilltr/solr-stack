@@ -36,7 +36,46 @@
         "scope": "ANY",
         "source": {
           "type": "SCRIPT",
-          "path": "SOLR/5.5.2/package/alerts/alert_solr_cpu_metrics.py"
+          "path": "SOLR/5.5.2/package/alerts/alert_solr_cpu_metrics.py",
+          "parameters": [
+            {
+              "name": "connection.timeout",
+              "value": 5.0,
+              "type": "NUMERIC",
+              "units": "seconds",
+              "visibility": "HIDDEN"
+            },
+            {
+              "name": "app.id",
+              "value": "solr-timeline-app",
+              "type": "STRING",
+              "visibility": "HIDDEN"
+            },
+            {
+              "name": "metric.names",
+              "value": "solr.admin.info.system.processCpuLoad",
+              "type": "STRING",
+              "visibility": "HIDDEN"
+            },
+            {
+              "name": "metric.solr.cpu.warning.threshold",
+              "display_name": "Warning threshold",
+              "type": "PERCENT",
+              "units": "%",
+              "value": 50,
+              "description": "CPU usage is greater than 50%",
+              "threshold": "WARNING"
+            },
+            {
+              "name": "metric.solr.cpu.critical.threshold",
+              "display_name": "Critical threshold",
+              "type": "PERCENT",
+              "units": "%",
+              "value": 75,
+              "description": "CPU usage is greater than 75%",
+              "threshold": "CRITICAL"
+            }
+          ]
         }
       },
       {
@@ -47,7 +86,46 @@
         "scope": "ANY",
         "source": {
           "type": "SCRIPT",
-          "path": "SOLR/5.5.2/package/alerts/alert_solr_memory_metrics.py"
+          "path": "SOLR/5.5.2/package/alerts/alert_solr_memory_metrics.py",
+          "parameters": [
+            {
+              "name": "connection.timeout",
+              "value": 5.0,
+              "type": "NUMERIC",
+              "units": "seconds",
+              "visibility": "HIDDEN"
+            },
+            {
+              "name": "app.id",
+              "value": "solr-timeline-app",
+              "type": "STRING",
+              "visibility": "HIDDEN"
+            },
+            {
+              "name": "metric.names",
+              "value": "solr.admin.info.jvm.memory.used,solr.admin.info.jvm.memory.max",
+              "type": "STRING",
+              "visibility": "HIDDEN"
+            },
+            {
+              "name": "metric.solr.memory.warning.threshold",
+              "display_name": "Warning threshold",
+              "type": "PERCENT",
+              "units": "%",
+              "value": 50,
+              "description": "Memory usage is greater than 50%",
+              "threshold": "WARNING"
+            },
+            {
+              "name": "metric.solr.memory.critical.threshold",
+              "display_name": "Critical threshold",
+              "type": "PERCENT",
+              "units": "%",
+              "value": 75,
+              "description": "Memory usage is greater than 75%",
+              "threshold": "CRITICAL"
+            }
+          ]
         }
       }
     ]

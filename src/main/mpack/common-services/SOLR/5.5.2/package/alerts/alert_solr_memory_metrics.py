@@ -24,6 +24,20 @@ SOLR_METRICS_CONF_DIR = '{{solr-metrics/solr_metrics_config_conf_dir}}'
 
 AMS_METRICS_GET_URL = "/ws/v1/timeline/metrics?%s"
 
+CONNECTION_TIMEOUT_DEFAULT = 5.0
+CONNECTION_TIMEOUT_KEY = "connection.timeout"
+
+METRIC_NAMES_DEFAULT = "solr.admin.info.jvm.memory.used,solr.admin.info.jvm.memory.max"
+METRIC_NAMES_KEY = "metric.names"
+
+APP_ID_DEFAULT = "solr-timeline-app"
+APP_ID_KEY = "app.id"
+
+WARNING_THRESHOLD_DEFAULT = 50
+WARNING_THRESHOLD_KEY = "metric.solr.memory.warning.threshold"
+
+CRITICAL_THRESHOLD_DEFAULT = 75
+CRITICAL_THRESHOLD_KEY = "metric.solr.memory.critical.threshold"
 
 def get_tokens():
     """
@@ -41,9 +55,25 @@ def execute(configurations={}, parameters={}, host_name=None):
         return RESULT_STATE_UNKNOWN, ['Undefined collector host: {0} or collector port {1}'.format(collector_host,
                                                                                                    collector_port)]
 
-    metric_name = "solr.admin.info.jvm.memory.used,solr.admin.info.jvm.memory.max"
-    app_id = "solr-timeline-app"
-    connection_timeout = 5.0
+    metric_name = METRIC_NAMES_DEFAULT
+    if METRIC_NAMES_KEY in parameters:
+        metric_name = parameters[METRIC_NAMES_KEY]
+
+    app_id = APP_ID_DEFAULT
+    if APP_ID_KEY in parameters:
+        app_id = parameters[APP_ID_KEY]
+
+    connection_timeout = CONNECTION_TIMEOUT_DEFAULT
+    if CONNECTION_TIMEOUT_KEY in parameters:
+        connection_timeout = parameters[CONNECTION_TIMEOUT_KEY]
+
+    warning_threshold = WARNING_THRESHOLD_DEFAULT
+    if WARNING_THRESHOLD_KEY in parameters:
+        warning_threshold = parameters[WARNING_THRESHOLD_KEY]
+
+    critical_threshold = CRITICAL_THRESHOLD_DEFAULT
+    if CRITICAL_THRESHOLD_KEY in parameters:
+        critical_threshold = parameters[CRITICAL_THRESHOLD_KEY]
 
     get_metrics_parameters = {
         "metricNames": metric_name,
@@ -86,10 +116,10 @@ def execute(configurations={}, parameters={}, host_name=None):
     memory_value = (memory_used / memory_max) * 100
     response = 'Memory usage is {0:.2f} %'.format(memory_value)
 
-    if int(memory_value) >= 50 and int(memory_value) < 75:
+    if int(memory_value) >= warning_threshold and int(memory_value) < critical_threshold:
         return RESULT_STATE_WARNING, [response]
 
-    if memory_value >= 75:
+    if memory_value >= critical_threshold:
         return RESULT_STATE_CRITICAL, [response]
 
     return RESULT_STATE_OK, [response]
