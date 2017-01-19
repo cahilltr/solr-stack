@@ -62,7 +62,7 @@
               "display_name": "Warning threshold",
               "type": "PERCENT",
               "units": "%",
-              "value": 50,
+              "value": 75,
               "description": "CPU usage is greater than 50%",
               "threshold": "WARNING"
             },
@@ -71,7 +71,7 @@
               "display_name": "Critical threshold",
               "type": "PERCENT",
               "units": "%",
-              "value": 75,
+              "value": 90,
               "description": "CPU usage is greater than 75%",
               "threshold": "CRITICAL"
             }
@@ -112,7 +112,7 @@
               "display_name": "Warning threshold",
               "type": "PERCENT",
               "units": "%",
-              "value": 50,
+              "value": 75,
               "description": "Memory usage is greater than 50%",
               "threshold": "WARNING"
             },
@@ -121,7 +121,7 @@
               "display_name": "Critical threshold",
               "type": "PERCENT",
               "units": "%",
-              "value": 75,
+              "value": 90,
               "description": "Memory usage is greater than 75%",
               "threshold": "CRITICAL"
             }
