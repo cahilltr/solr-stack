@@ -29,6 +29,29 @@
           ]
         }
       ]
+    },
+    {
+      "name": "SOLR-common-services",
+      "type": "service-definitions",
+      "source_dir": "common-services",
+      "service_version": "6.3.0"
+    },
+    {
+      "name": "SOLR-6.3.0",
+      "type": "stack-addon-service-definitions",
+      "source_dir": "custom-services",
+      "service_versions_map": [
+        {
+          "service_name" : "SOLR",
+          "service_version" : "6.3.0",
+          "applicable_stacks" : [
+            {
+              "stack_name" : "HDP",
+              "stack_version" : "2.4"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
