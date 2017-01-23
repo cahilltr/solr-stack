@@ -200,11 +200,6 @@
               "pointInTime": false,
               "temporal": true
             },
-            "metrics/dfs/namenode/FilesInGetListingOps": {
-              "metric": "dfs.namenode.FilesInGetListingOps",
-              "pointInTime": false,
-              "temporal": true
-            },
             "metrics/jvm/threadsRunnable": {
               "metric": "jvm.JvmMetrics.ThreadsRunnable",
               "pointInTime": false,
@@ -310,110 +305,6 @@
               "metric": "jvm.JvmMetrics.MemNonHeapMaxM",
               "pointInTime": true,
               "temporal": true
-            }
-          }
-        }
-      },
-      {
-        "type": "jmx",
-        "metrics": {
-          "default": {
-            "metrics/dfs/namenode/Used": {
-              "metric": "Hadoop:service=NameNode,name=NameNodeInfo.Used",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/memMaxM": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.MemMaxM",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/memNonHeapUsedM": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.MemNonHeapUsedM",
-              "unit": "MB",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/threadsBlocked": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.ThreadsBlocked",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/memNonHeapCommittedM": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.MemNonHeapCommittedM",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/memHeapCommittedM": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.MemHeapCommittedM",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/threadsRunnable": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.ThreadsRunnable",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/threadsNew": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.ThreadsNew",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/logWarn": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.LogWarn",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/threadsTimedWaiting": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.ThreadsTimedWaiting",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/gcCount": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.GcCount",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/memHeapUsedM": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.MemHeapUsedM",
-              "unit": "MB",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/threadsWaiting": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.ThreadsWaiting",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/threadsTerminated": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.ThreadsTerminated",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/logInfo": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.LogInfo",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/logError": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.LogError",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/logFatal": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.LogFatal",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/GcTimeMillisConcurrentMarkSweep": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.GcTimeMillisConcurrentMarkSweep",
-              "pointInTime": true,
-              "temporal": false
-            },
-            "metrics/jvm/GcCountConcurrentMarkSweep": {
-              "metric": "Hadoop:service=NameNode,name=JvmMetrics.GcCountConcurrentMarkSweep",
-              "pointInTime": true,
-              "temporal": false
             }
           }
         }

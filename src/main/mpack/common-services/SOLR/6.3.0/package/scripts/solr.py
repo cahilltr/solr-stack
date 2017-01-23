@@ -4,7 +4,10 @@ from resource_management.libraries.functions.check_process_status import check_p
 from resource_management.libraries.script.script import Script
 from setup_solr import setup_solr
 from setup_solr_cloud import setup_solr_cloud
-from solr_utils import solr_status_validation, solr_port_validation
+from setup_solr_hdfs_support import setup_solr_hdfs_support
+from setup_solr_ssl_support import setup_solr_ssl_support, remove_solr_ssl_support
+from setup_solr_kerberos_auth import setup_solr_kerberos_auth, remove_solr_kerberos_auth
+from solr_utils import solr_status_validation, solr_port_validation, delete_write_lock_files
 
 
 class Solr(Script):
@@ -12,9 +15,6 @@ class Solr(Script):
         import params
         env.set_params(params)
         self.install_packages(env)
-        Execute('mkdir -p /opt/lucidworks-hdpsearch')
-        Execute(format('wget -qO- {solr_config_url} | tar xvz -C /opt/ && mv /opt/solr-* /opt/lucidworks-hdpsearch/solr'))
-
 
     def configure(self, env):
         import params
@@ -23,6 +23,22 @@ class Solr(Script):
 
         if params.solr_cloud_mode:
             setup_solr_cloud()
+
+        if params.solr_hdfs_enable:
+            setup_solr_hdfs_support()
+
+        if params.solr_ssl_enable:
+            setup_solr_ssl_support()
+        else:
+            remove_solr_ssl_support()
+
+        if params.security_enabled:
+            setup_solr_kerberos_auth()
+        else:
+            remove_solr_kerberos_auth()
+
+        if params.solr_hdfs_enable and params.solr_hdfs_delete_write_lock_files:
+            delete_write_lock_files()
 
     def start(self, env):
         import params
@@ -39,12 +55,24 @@ class Solr(Script):
 
         if params.solr_cloud_mode:
             start_command += format(' -cloud -z {zookeeper_hosts}{solr_cloud_zk_directory}')
+        elif not params.solr_cloud_mode and params.security_enabled:
+            start_command += ' -DauthenticationPlugin=org.apache.solr.security.KerberosPlugin'
+
+        if params.solr_hdfs_enable:
+            start_command += format(' -Dsolr.directoryFactory=HdfsDirectoryFactory -Dsolr.lock.type=hdfs')
+            start_command += format(' -Dsolr.hdfs.home={default_fs}{solr_hdfs_directory}')
+            start_command += format(' -Dsolr.hdfs.confdir={hadoop_conf_dir}')
+
+            if params.security_enabled:
+                start_command += format(' -Dsolr.hdfs.security.kerberos.enabled=true')
+                start_command += format(' -Dsolr.hdfs.security.kerberos.keytabfile={solr_kerberos_keytab}')
+                start_command += format(' -Dsolr.hdfs.security.kerberos.principal={solr_kerberos_principal}')
 
         start_command += format(' -p {solr_config_port} -m {solr_config_memory} >> {solr_config_service_log_file} 2>&1')
 
         Execute(
             start_command,
-            environment={'JAVA_HOME': params.java64_home},            
+            environment={'JAVA_HOME': params.java64_home},
             user=params.solr_config_user
         )
 

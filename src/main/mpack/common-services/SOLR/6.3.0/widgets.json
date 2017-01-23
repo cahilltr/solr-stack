@@ -15,15 +15,13 @@
               "name": "jvm.JvmMetrics.GcCount._rate",
               "metric_path": "metrics/jvm/gcCount._rate",
               "service_name": "SOLR",
-              "component_name": "SOLR_SERVER",
-              "host_component_criteria": "host_components/metrics/dfs/FSNamesystem/HAState=active"
+              "component_name": "SOLR_SERVER"
             },
             {
               "name": "jvm.JvmMetrics.GcCountConcurrentMarkSweep._rate",
               "metric_path": "metrics/jvm/GcCountConcurrentMarkSweep._rate",
               "service_name": "SOLR",
-              "component_name": "SOLR_SERVER",
-              "host_component_criteria": "host_components/metrics/dfs/FSNamesystem/HAState=active"
+              "component_name": "SOLR_SERVER"
             }
           ],
           "values": [
@@ -51,8 +49,7 @@
               "name": "jvm.JvmMetrics.GcTimeMillisConcurrentMarkSweep._rate",
               "metric_path": "metrics/jvm/GcTimeMillisConcurrentMarkSweep._rate",
               "service_name": "SOLR",
-              "component_name": "SOLR_SERVER",
-              "host_component_criteria": "host_components/metrics/dfs/FSNamesystem/HAState=active"
+              "component_name": "SOLR_SERVER"
             }
           ],
           "values": [
@@ -77,15 +74,13 @@
               "name": "jvm.JvmMetrics.MemHeapCommittedM",
               "metric_path": "metrics/jvm/memHeapCommittedM",
               "service_name": "SOLR",
-              "component_name": "SOLR_SERVER",
-              "host_component_criteria": "host_components/metrics/dfs/FSNamesystem/HAState=active"
+              "component_name": "SOLR_SERVER"
             },
             {
               "name": "jvm.JvmMetrics.MemHeapUsedM",
               "metric_path": "metrics/jvm/memHeapUsedM",
               "service_name": "SOLR",
-              "component_name": "SOLR_SERVER",
-              "host_component_criteria": "host_components/metrics/dfs/FSNamesystem/HAState=active"
+              "component_name": "SOLR_SERVER"
             }
           ],
           "values": [
