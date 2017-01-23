@@ -4,7 +4,6 @@ from resource_management.libraries.functions.check_process_status import check_p
 from resource_management.libraries.script.script import Script
 from setup_solr import setup_solr
 from setup_solr_cloud import setup_solr_cloud
-from setup_solr_hdfs_support import setup_solr_hdfs_support
 from setup_solr_ssl_support import setup_solr_ssl_support, remove_solr_ssl_support
 from setup_solr_kerberos_auth import setup_solr_kerberos_auth, remove_solr_kerberos_auth
 from solr_utils import solr_status_validation, solr_port_validation, delete_write_lock_files
