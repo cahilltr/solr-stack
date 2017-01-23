@@ -16,13 +16,13 @@ class Solr(Script):
         Execute(format('wget -qO- {solr_config_url} | tar xvz -C /opt/ && mv /opt/solr-* /opt/lucidworks-hdpsearch/solr'))
 
 
-def configure(self, env):
-    import params
-    env.set_params(params)
-    setup_solr()
+    def configure(self, env):
+        import params
+        env.set_params(params)
+        setup_solr()
 
-    if params.solr_cloud_mode:
-        setup_solr_cloud()
+        if params.solr_cloud_mode:
+            setup_solr_cloud()
 
     def start(self, env):
         import params
