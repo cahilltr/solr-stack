@@ -56,6 +56,7 @@
                 <!--<config-type>solr-ssl</config-type>-->
                 <config-type>example-collection</config-type>
             </configuration-dependencies>
+            <widgetsFileName>widgets.json</widgetsFileName>
             <restartRequiredAfterChange>true</restartRequiredAfterChange>
 
             <quickLinksConfigurations>
