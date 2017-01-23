@@ -70,14 +70,3 @@ solr_collection_name = map_example_collection['solr_collection_sample_name']
 solr_collection_config_dir = map_example_collection['solr_collection_sample_config_directory']
 solr_collection_shards = str(map_example_collection['solr_collection_sample_shards'])
 solr_collection_replicas = str(map_example_collection['solr_collection_sample_replicas'])
-
-# solr + SSL
-map_solr_ssl = config['configurations']['solr-ssl']
-solr_ssl_enable = bool(map_solr_ssl['solr_ssl_enable'])
-solr_ssl_prefix = '#' if not solr_ssl_enable else ''
-solr_ssl_key_store = map_solr_ssl['solr_ssl_key_store']
-solr_ssl_key_store_password = map_solr_ssl['solr_ssl_key_store_password']
-solr_ssl_trust_store = map_solr_ssl['solr_ssl_trust_store']
-solr_ssl_trust_store_password = map_solr_ssl['solr_ssl_trust_store_password']
-solr_ssl_need_client_auth = map_solr_ssl['solr_ssl_need_client_auth']
-solr_ssl_want_client_auth = map_solr_ssl['solr_ssl_want_client_auth']

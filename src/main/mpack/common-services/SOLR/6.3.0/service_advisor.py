@@ -17,7 +17,7 @@ except Exception as e:
 SOLR_CONFIG_ENV = "solr-config-env"
 SOLR_CLOUD = "solr-cloud"
 SOLR_HDFS = "solr-hdfs"
-SOLR_SSL = "solr-ssl"
+# SOLR_SSL = "solr-ssl"
 EXAMPLE_COLLECTION = "example-collection"
 PROPERTIES = "properties"
 
@@ -123,21 +123,6 @@ class SOLR630ServiceAdvisor(service_advisor.ServiceAdvisor):
             ]
         return self.stackAdvisor.toConfigurationValidationProblems(items, SOLR_HDFS)
 
-    def validate_solr_ssl_configuration(self):
-        items = [] if "false" in self.solr_ssl_properties["solr_ssl_enable"] else \
-            [
-                self.validator_entry('solr_ssl_enable', self.is_boolean, self.solr_ssl_properties),
-                self.validator_entry('solr_ssl_key_store', self.is_absolute_path, self.solr_ssl_properties),
-                self.validator_entry('solr_ssl_key_store_password', self.is_not_null_or_empty,
-                                     self.solr_ssl_properties),
-                self.validator_entry('solr_ssl_trust_store', self.is_absolute_path, self.solr_ssl_properties),
-                self.validator_entry('solr_ssl_trust_store_password', self.is_not_null_or_empty,
-                                     self.solr_ssl_properties),
-                self.validator_entry('solr_ssl_need_client_auth', self.is_boolean, self.solr_ssl_properties),
-                self.validator_entry('solr_ssl_want_client_auth', self.is_boolean, self.solr_ssl_properties)
-            ]
-        return self.stackAdvisor.toConfigurationValidationProblems(items, SOLR_SSL)
-
     def validate_example_collection_configuration(self):
         items = [] if "false" in self.example_collection_properties["solr_collection_sample_create"] else \
             [
@@ -162,9 +147,7 @@ class SOLR630ServiceAdvisor(service_advisor.ServiceAdvisor):
         self.solr_config_properties = configurations[SOLR_CONFIG_ENV][PROPERTIES]
         self.solr_cloud_properties = configurations[SOLR_CLOUD][PROPERTIES]
         self.solr_hdfs_properties = configurations[SOLR_HDFS][PROPERTIES]
-        self.solr_ssl_properties = configurations[SOLR_SSL][PROPERTIES]
         self.example_collection_properties = configurations[EXAMPLE_COLLECTION][PROPERTIES]
 
         return self.validate_solr_configuration() + self.validate_solr_cloud_configuration() + \
-               self.validate_solr_hdfs_configuration() + self.validate_solr_ssl_configuration() + \
                self.validate_example_collection_configuration()

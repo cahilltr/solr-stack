@@ -24,11 +24,6 @@ def configure(self, env):
     if params.solr_cloud_mode:
         setup_solr_cloud()
 
-    if params.solr_ssl_enable:
-        setup_solr_ssl_support()
-    else:
-        remove_solr_ssl_support()
-
     def start(self, env):
         import params
         env.set_params(params)
